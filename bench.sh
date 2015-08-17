@@ -147,7 +147,7 @@ case $1 in
 	'-6' )
 		intro; sysinfo; speedtest6; iotest;;
 	'-46' )
-		intro; systeminfo; seedtest4; speedtest6; iotest;;
+		intro; sysinfo; speedtest4; speedtest6; iotest;;
 	*)
 		intro; sysinfo; speedtest4; iotest;;
 esac
