@@ -10,14 +10,6 @@
 # Github: https://github.com/hidden-refuge/fvps-bench #
 #######################################################
 
-intro () {
-	echo ""
-	echo "FreeVPS Directory & Discussion Benchmark Script"
-	echo "Visit https://freevps.us/thread-2252.html for support."
-	echo ""
-	echo ""
-}
-
 sysinfo () {
 	# Reading out system information...
 
@@ -42,6 +34,7 @@ sysinfo () {
 	echo "Total amount of Memory: $tram MB"
 	echo "Total amount of Swap: $swap MB"
 	echo "Uptime: $up"
+	echo ""
 	echo ""
 }
 
@@ -141,13 +134,13 @@ iotest () {
 
 case $1 in
 	'-sysinfo')
-		intro; sysinfo;;
+		sysinfo;;
 	'-io')
-		intro; iotest;;
+		iotest;;
 	'-6' )
-		intro; sysinfo; speedtest6; iotest;;
+		sysinfo; speedtest6; iotest;;
 	'-46' )
-		intro; sysinfo; speedtest4; speedtest6; iotest;;
+		sysinfo; speedtest4; speedtest6; iotest;;
 	*)
-		intro; sysinfo; speedtest4; iotest;;
+		sysinfo; speedtest4; iotest;;
 esac
