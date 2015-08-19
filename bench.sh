@@ -19,7 +19,7 @@ sysinfo () {
 	# Reading total memory in MB
 	tram=$( free -m | awk 'NR==2 {print $2}' )
 	# Reading Swap in MB
-	swap=$( free -m | awk 'NR==4 {print $2}' )
+	vram=$( free -m | awk 'NR==4 {print $2}' )
 	# Reading system uptime
 	up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }' )
 	# Output of results
@@ -28,7 +28,7 @@ sysinfo () {
 	echo "Cores: $cores"
 	echo "Frequency: $freq MHz"
 	echo "Memory: $tram MB"
-	echo "Swap: $swap MB"
+	echo "Swap: $vram MB"
 	echo "Uptime: $up"
 	echo ""
 	echo ""
