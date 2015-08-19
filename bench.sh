@@ -111,7 +111,7 @@ iotest () {
 	io=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 	# Output of DD result
 	echo "Drive Speed:"
-	echo "I/O Speed : $io"
+	echo "I/O: $io"
 	echo ""
 }
 case $1 in
