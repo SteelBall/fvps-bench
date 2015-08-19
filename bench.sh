@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #######################################################
 # FreeVPS Benchmark Script Version 2.0                #
 # By Hidden Refuge from FreeVPS                       #
@@ -9,10 +8,8 @@
 # License: GNU General Public License 3.0             #
 # Github: https://github.com/hidden-refuge/fvps-bench #
 #######################################################
-
 sysinfo () {
 	# Reading out system information...
-
 	# Reading CPU model
 	cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
 	# Reading amount of CPU cores
@@ -25,7 +22,6 @@ sysinfo () {
 	swap=$( free -m | awk 'NR==4 {print $2}' )
 	# Reading system uptime
 	up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; print }' )
-
 	# Output of results
 	echo "System Info:"
 	echo "CPU: $cname"
@@ -37,19 +33,16 @@ sysinfo () {
 	echo ""
 	echo ""
 }
-
 speedtest4 () {
 	# Speed test via wget for IPv4 only with 10x 100 MB files. 1 GB bandwidth will be used!
 	echo "Speedtest IPv4 only"
 	echo ""
 	echo ""
-
 	# Cachefly CDN speed test
 	echo "CDN - nearest location:"
 	cachefly=$( wget -4 -O /dev/null http://cachefly.cachefly.net/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
 	echo "Download speed from Cachefly: $cachefly "
 	echo ""
-
 	# United States speed test
 	echo "America - United States:"
 	coloatatl=$( wget -4 -O /dev/null http://speed.atl.coloat.com/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -63,7 +56,6 @@ speedtest4 () {
 	slwdc=$( wget -4 -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
 	echo "Download speed from Softlayer, Washington, DC: $slwdc "
 	echo ""
-
 	# Asia speed test
 	echo "Asia:"
 	linodejp=$( wget -4 -O /dev/null http://speedtest.tokyo.linode.com/100MB-tokyo.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -71,7 +63,6 @@ speedtest4 () {
 	slsg=$( wget -4 -O /dev/null http://speedtest.sng01.softlayer.com/downloads/test100.zip 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
 	echo "Download speed from Softlayer, Singapore: $slsg "
 	echo ""
-
 	# Europe speed test
 	echo "Europe:"
 	i3d=$( wget -4 -O /dev/null http://mirror.i3d.net/100mb.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -81,13 +72,11 @@ speedtest4 () {
 	echo ""
 	echo ""
 }
-
 speedtest6 () {
   	# Speed test via wget for IPv6 only with 10x 100 MB files. 1 GB bandwidth will be used! No CDN - Cachefly not IPv6 ready...
   	echo "Speedtest IPv6 only"
   	echo ""
   	echo ""
-
   	# United States speed test
   	echo "America - United States:"
 	v6atl=$( wget -6 -O /dev/null http://speedtest.atlanta.linode.com/100MB-atlanta.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -101,7 +90,6 @@ speedtest6 () {
   	v6chi=$( wget -6 -O /dev/null http://testfile.chi.steadfast.net/data.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
   	echo "Download speed from Steadfast, Chicago, IL: $v6chi"
 	echo ""
-
 	# Asia speed test
 	echo "Asia:"
   	v6tok=$( wget -6 -O /dev/null http://speedtest.tokyo.linode.com/100MB-tokyo.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -109,7 +97,6 @@ speedtest6 () {
   	v6sin=$( wget -6 -O /dev/null http://speedtest.singapore.linode.com/100MB-singapore.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
   	echo "Download speed from Linode, Singapore: $v6sin"
 	echo ""
-
 	# Europe speed test
 	echo "Europe:"
 	v6fra=$( wget -6 -O /dev/null http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -121,17 +108,14 @@ speedtest6 () {
 	echo ""
 	echo ""
 }
-
 iotest () {
 	# Measuring disk speed with DD
 	io=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
-
 	# Output of DD result
 	echo "Drive Speed:"
 	echo "I/O speed : $io"
 	echo ""
 }
-
 case $1 in
 	'-sysinfo')
 		sysinfo;;
