@@ -25,10 +25,10 @@ sysinfo () {
 	# Output of results
 	echo "System Info:"
 	echo "CPU: $cname"
-	echo "No. of Cores: $cores"
-	echo "CPU Frequency: $freq MHz"
-	echo "Total amount of Memory: $tram MB"
-	echo "Total amount of Swap: $swap MB"
+	echo "Cores: $cores"
+	echo "Frequency: $freq MHz"
+	echo "Memory: $tram MB"
+	echo "Swap: $swap MB"
 	echo "Uptime: $up"
 	echo ""
 	echo ""
@@ -36,7 +36,6 @@ sysinfo () {
 speedtest4 () {
 	# Speed test via wget for IPv4 only with 10x 100 MB files. 1 GB bandwidth will be used!
 	echo "Speedtest IPv4 only"
-	echo ""
 	echo ""
 	# Cachefly CDN speed test
 	echo "CDN - nearest location:"
@@ -76,7 +75,6 @@ speedtest6 () {
   	# Speed test via wget for IPv6 only with 10x 100 MB files. 1 GB bandwidth will be used! No CDN - Cachefly not IPv6 ready...
   	echo "Speedtest IPv6 only"
   	echo ""
-  	echo ""
   	# United States speed test
   	echo "America - United States:"
 	v6atl=$( wget -6 -O /dev/null http://speedtest.atlanta.linode.com/100MB-atlanta.bin 2>&1 | awk '/\/dev\/null/ {speed=$3 $4} END {gsub(/\(|\)/,"",speed); print speed}' )
@@ -113,7 +111,7 @@ iotest () {
 	io=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
 	# Output of DD result
 	echo "Drive Speed:"
-	echo "I/O speed : $io"
+	echo "I/O Speed : $io"
 	echo ""
 }
 case $1 in
