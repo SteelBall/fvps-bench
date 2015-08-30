@@ -109,8 +109,8 @@ speedtest6 () {
 iotest () {
 	# Measuring disk speed with DD
 	io=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io=$NF} END { print io}' )
-	io2=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io2=$NF2} END { print io2}' )
-	io3=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io3=$NF3} END { print io3}' )
+	io2=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io2=$NF} END { print io}' )
+	io3=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F, '{io3=$NF} END { print io}' )
 	# Output of DD result
 	echo "Drive Speed:"
 	echo "I/O (1st attempt): $io"
