@@ -116,6 +116,13 @@ iotest () {
 	echo "I/O (1st attempt): $io"
 	echo "I/O (2nd attempt): $io2"
 	echo "I/O (3rd attempt): $io3"
+	# Calculating avg I/O
+	ioraw=$( echo $io | awk 'NR==1 {print $1}' )
+	ioraw2=$( echo $io2 | awk 'NR==1 {print $1}' )
+	ioraw3=$( echo $io3 | awk 'NR==1 {print $1}' )
+	ioall=$( expr $io + $io2 + $io3)
+	ioavg=$( expr $ioall / 3 )
+	echo "Average I/O: $ioavg MB/s"
 	echo ""
 }
 case $1 in
